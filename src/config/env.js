@@ -5,10 +5,6 @@ const rootDir = path.resolve(__dirname, '../..');
 const databaseUrl = process.env.DATABASE_URL;
 
 function detectDbClient(value) {
-  if (process.env.DB_CLIENT) {
-    return process.env.DB_CLIENT;
-  }
-
   if (value && /^(postgres|postgresql):\/\//i.test(value)) {
     return 'postgres';
   }

@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const db = require('./knex');
+const db = require('./client');
 
 const seedUsers = [
   {

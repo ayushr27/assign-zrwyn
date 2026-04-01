@@ -1,12 +1,12 @@
 const env = require('./config/env');
-const db = require('./db/knex');
+const db = require('./db/client');
 const { createApp } = require('./app');
 
 async function start() {
   const app = await createApp();
-  const server = app.listen(env.port, () => {
+  const server = app.listen(env.port, '0.0.0.0', () => {
     // eslint-disable-next-line no-console
-    console.log(`Finance Dashboard API listening on port ${env.port}`);
+    console.log(`Finance Dashboard API listening on 0.0.0.0:${env.port}`);
   });
 
   const shutdown = async () => {

@@ -1,4 +1,4 @@
-const db = require('../../db/knex');
+const db = require('../../db/client');
 const { centsToAmount } = require('../../utils/amounts');
 const { toRecord } = require('../records/records.presenter');
 

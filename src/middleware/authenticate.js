@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const db = require('../db/knex');
+const db = require('../db/client');
 const env = require('../config/env');
 const { AppError } = require('../utils/errors');
 const { getPermissionsForRole } = require('../utils/permissions');

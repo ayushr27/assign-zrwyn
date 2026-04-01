@@ -1,4 +1,4 @@
-const db = require('../../db/knex');
+const db = require('../../db/client');
 const { amountToCents } = require('../../utils/amounts');
 const { AppError } = require('../../utils/errors');
 const { buildPagination } = require('../../utils/pagination');

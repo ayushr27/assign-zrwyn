@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const env = require('../../config/env');
-const db = require('../../db/knex');
+const db = require('../../db/client');
 const { AppError } = require('../../utils/errors');
 const { toPublicUser } = require('../users/users.presenter');
 

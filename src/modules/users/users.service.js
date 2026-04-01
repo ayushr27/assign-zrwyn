@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const db = require('../../db/knex');
+const db = require('../../db/client');
 const { AppError } = require('../../utils/errors');
 const { buildPagination } = require('../../utils/pagination');
 const { toPublicUser } = require('./users.presenter');

@@ -127,6 +127,16 @@ To run against PostgreSQL instead:
 - set `DATABASE_URL` to a `postgres://` or `postgresql://` connection string
 - set `DATABASE_SSL=true` only if your PostgreSQL provider requires SSL
 
+## Environment Variables
+
+- `PORT`: HTTP server port. Default `3000`.
+- `JWT_SECRET`: signing secret for JWT access tokens.
+- `DATABASE_URL`: SQLite path for local use or PostgreSQL connection string for deployment.
+- `DATABASE_SSL`: PostgreSQL SSL toggle. Default `false`.
+- `DB_POOL_MAX`: PostgreSQL connection pool size. Default `10`.
+- `RATE_LIMIT_WINDOW_MS`: rate-limit window in milliseconds.
+- `RATE_LIMIT_MAX`: maximum requests allowed in the rate-limit window.
+
 ## Available Scripts
 
 - `npm start` - start the server
@@ -142,6 +152,7 @@ The repository includes [render.yaml](/Users/ayushrahate/Documents/assign-zrwyn/
 - a generated `JWT_SECRET`
 - `DATABASE_URL` wired from the database's private `connectionString`
 - a `/health` health check
+- Swagger docs that work from the deployed service's own domain
 
 Recommended deploy flow:
 
@@ -155,6 +166,7 @@ Why this setup:
 
 - Render Blueprint `fromDatabase.connectionString` resolves to the private/internal database URL, which is the preferred low-latency path for services running in the same Render region.
 - PostgreSQL avoids the persistence limitations that SQLite would have on ephemeral web-service filesystems.
+- The OpenAPI `servers` value is set to `/`, so Swagger "Try it out" uses the same origin in both local and deployed environments.
 
 ## API Overview
 

@@ -10,7 +10,7 @@ function createOpenApiSpec() {
     },
     servers: [
       {
-        url: `http://localhost:${env.port}`,
+        url: '/',
       },
     ],
     components: {
