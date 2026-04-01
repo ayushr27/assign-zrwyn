@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: finance-dashboard-api
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22.22.0
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: finance-dashboard-db
+          property: connectionString
+      - key: DATABASE_SSL
+        value: "false"
+      - key: DB_POOL_MAX
+        value: "10"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: RATE_LIMIT_WINDOW_MS
+        value: "900000"
+      - key: RATE_LIMIT_MAX
+        value: "200"
+
+databases:
+  - name: finance-dashboard-db
+    plan: free
+    region: oregon
+    databaseName: finance_dashboard
