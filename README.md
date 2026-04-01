@@ -145,6 +145,12 @@ To run against PostgreSQL instead:
 - `npm run dev` - start with nodemon
 - `npm test` - run the automated test suite
 
+## Live Links
+
+- Live API: `https://assign-zrwyn.onrender.com/`
+- Swagger docs: `https://assign-zrwyn.onrender.com/api/docs`
+- Health check: `https://assign-zrwyn.onrender.com/health`
+
 ## Render Deployment
 
 The repository includes [render.yaml](/Users/ayushrahate/Documents/assign-zrwyn/render.yaml), which provisions:
