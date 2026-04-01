@@ -27,6 +27,18 @@ afterAll(async () => {
 });
 
 describe('finance dashboard backend', () => {
+  test('root route returns service metadata for deployment landing pages', async () => {
+    const response = await request(app).get('/');
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+      name: 'Finance Dashboard Backend API',
+      status: 'ok',
+      docsPath: '/api/docs',
+      healthPath: '/health',
+    });
+  });
+
   test('authenticates seeded admin user and returns the current profile', async () => {
     const loginResponse = await request(app).post('/api/auth/login').send({
       email: 'admin@finance.local',

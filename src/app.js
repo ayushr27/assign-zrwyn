@@ -41,6 +41,15 @@ async function createApp(options = {}) {
     );
   }
 
+  app.get('/', (_req, res) => {
+    res.json({
+      name: 'Finance Dashboard Backend API',
+      status: 'ok',
+      docsPath: '/api/docs',
+      healthPath: '/health',
+    });
+  });
+
   app.get('/health', asyncHandler(async (_req, res) => {
     const databaseCheck = await db.get('SELECT 1 AS ok');
 

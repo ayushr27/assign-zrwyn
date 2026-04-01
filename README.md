@@ -116,6 +116,7 @@ It also seeds a small set of income and expense records so summary endpoints are
 4. The API will be available at:
 
    - `http://localhost:3000`
+   - Root status: `http://localhost:3000/`
    - Swagger docs: `http://localhost:3000/api/docs`
 
 Local development defaults to SQLite via:
@@ -150,6 +151,7 @@ The repository includes [render.yaml](/Users/ayushrahate/Documents/assign-zrwyn/
 - a Node web service
 - a Render Postgres database
 - a generated `JWT_SECRET`
+- a root `/` route that returns API status and entry-point links
 - `DATABASE_URL` wired from the database's private `connectionString`
 - a `/health` health check
 - Swagger docs that work from the deployed service's own domain
