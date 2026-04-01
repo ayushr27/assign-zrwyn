@@ -1,5 +1,3 @@
-const env = require('./env');
-
 function createOpenApiSpec() {
   return {
     openapi: '3.0.3',
@@ -22,6 +20,24 @@ function createOpenApiSpec() {
         },
       },
       schemas: {
+        ServiceStatus: {
+          type: 'object',
+          properties: {
+            name: { type: 'string', example: 'Finance Dashboard Backend API' },
+            status: { type: 'string', example: 'ok' },
+            docsPath: { type: 'string', example: '/api/docs' },
+            healthPath: { type: 'string', example: '/health' },
+          },
+        },
+        HealthStatus: {
+          type: 'object',
+          properties: {
+            status: { type: 'string', example: 'ok' },
+            environment: { type: 'string', example: 'production' },
+            database: { type: 'string', example: 'ok' },
+            timestamp: { type: 'string', example: '2026-04-01T16:05:28.477Z' },
+          },
+        },
         ErrorResponse: {
           type: 'object',
           properties: {
@@ -348,12 +364,32 @@ function createOpenApiSpec() {
       },
     },
     paths: {
+      '/': {
+        get: {
+          summary: 'Get service metadata and entry points',
+          responses: {
+            200: {
+              description: 'Service metadata fetched successfully',
+              content: {
+                'application/json': {
+                  schema: { $ref: '#/components/schemas/ServiceStatus' },
+                },
+              },
+            },
+          },
+        },
+      },
       '/health': {
         get: {
           summary: 'Health check',
           responses: {
             200: {
               description: 'API is healthy',
+              content: {
+                'application/json': {
+                  schema: { $ref: '#/components/schemas/HealthStatus' },
+                },
+              },
             },
           },
         },

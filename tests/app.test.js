@@ -39,6 +39,16 @@ describe('finance dashboard backend', () => {
     });
   });
 
+  test('health route reports application and database availability', async () => {
+    const response = await request(app).get('/health');
+
+    expect(response.status).toBe(200);
+    expect(response.body.status).toBe('ok');
+    expect(response.body.environment).toBe('test');
+    expect(response.body.database).toBe('ok');
+    expect(response.body.timestamp).toBeTruthy();
+  });
+
   test('authenticates seeded admin user and returns the current profile', async () => {
     const loginResponse = await request(app).post('/api/auth/login').send({
       email: 'admin@finance.local',

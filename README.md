@@ -66,6 +66,7 @@ Backend assignment implementation for a finance dashboard system. The API suppor
 5. Validation and Error Handling
    - Joi validates request bodies, params, and query strings.
    - Invalid calendar dates and invalid date ranges are rejected.
+   - Production startup validates required deployment configuration and rejects insecure defaults.
    - Errors return consistent JSON payloads with appropriate status codes.
 
 6. Data Persistence
@@ -171,6 +172,9 @@ Why this setup:
 - The OpenAPI `servers` value is set to `/`, so Swagger "Try it out" uses the same origin in both local and deployed environments.
 
 ## API Overview
+
+- `GET /`
+- `GET /health`
 
 ### Auth
 

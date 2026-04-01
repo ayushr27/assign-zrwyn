@@ -1,7 +1,7 @@
 {
   "name": "finance-dashboard-backend",
   "version": "1.0.0",
-  "description": "Role-based finance dashboard backend built with Express and SQLite.",
+  "description": "Role-based finance dashboard backend built with Express, SQLite, and PostgreSQL.",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",

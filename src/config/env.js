@@ -3,6 +3,8 @@ require('dotenv').config();
 
 const rootDir = path.resolve(__dirname, '../..');
 const databaseUrl = process.env.DATABASE_URL;
+const environment = process.env.NODE_ENV || 'development';
+const jwtSecret = process.env.JWT_SECRET || 'development-secret-change-me';
 
 function detectDbClient(value) {
   if (value && /^(postgres|postgresql):\/\//i.test(value)) {
@@ -24,10 +26,30 @@ function resolveDatabaseFilename(value) {
   return path.isAbsolute(value) ? value : path.join(rootDir, value);
 }
 
+function validateEnvironmentConfig() {
+  if (environment !== 'production') {
+    return;
+  }
+
+  if (!process.env.JWT_SECRET) {
+    throw new Error('JWT_SECRET is required when NODE_ENV=production.');
+  }
+
+  if (!databaseUrl) {
+    throw new Error('DATABASE_URL is required when NODE_ENV=production.');
+  }
+
+  if (detectDbClient(databaseUrl) !== 'postgres') {
+    throw new Error('Production deployments must use a PostgreSQL DATABASE_URL.');
+  }
+}
+
+validateEnvironmentConfig();
+
 module.exports = {
-  environment: process.env.NODE_ENV || 'development',
+  environment,
   port: Number(process.env.PORT || 3000),
-  jwtSecret: process.env.JWT_SECRET || 'development-secret-change-me',
+  jwtSecret,
   dbClient: detectDbClient(databaseUrl),
   databaseUrl: databaseUrl || null,
   dbFilename: detectDbClient(databaseUrl) === 'sqlite' ? resolveDatabaseFilename(databaseUrl) : null,
